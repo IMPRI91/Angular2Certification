@@ -1,0 +1,23 @@
+<div>
+    <h3>Step 2: Select your config and options<h3>
+
+    <div>
+        <label>Config: </label>
+        <select id="configSelect" (change)="onCarSelected($event.target.value)">
+            <option value="volvo"> Volvo </option>
+            <option value="saab"> Saab </option>
+            <option value="fiat"> Fiat </option>
+        </select>
+    </div>
+    <div>
+        <label>Range: </label>
+    </div>
+    <div>
+       <label>Tow hitch? </label>
+       <input type="checkbox" id="includeTow" (change)="onOptionSelected('includeTow', $event.target.checked)">
+    </div>
+    <div>
+        <label>yoke steering wheel? </label>
+        <input type="checkbox" id="includeYoke" (change)="onOptionSelected('includeYoke', $event.target.checked)">
+     </div>
+</div>

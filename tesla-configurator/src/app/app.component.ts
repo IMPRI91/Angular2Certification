@@ -5,11 +5,17 @@ import {AsyncPipe, JsonPipe} from '@angular/common';
   selector: 'app-root',
   standalone: true,
   imports: [AsyncPipe, JsonPipe],
-  template: `
-    <h1>Hello from {{ name }}!</h1>
-  `,
 })
 export class AppComponent {
-  name = 'Angular';
+  selectedStep: number = 0;
+  isCarConfigAvailable: boolean = false;
+  isCarSummaryAvailable: boolean = false;
 
+  onCarConfigChanged(isCarConfigAvailable: boolean){
+    this.isCarConfigAvailable = isCarConfigAvailable;
+  }
+
+  onCarSummaryChanged(isCarSummaryAvailable: boolean){
+    this.isCarSummaryAvailable = isCarSummaryAvailable;
+  }
 }
