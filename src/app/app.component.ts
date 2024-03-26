@@ -1,16 +1,28 @@
 import {Component} from '@angular/core';
-import {AsyncPipe, JsonPipe} from '@angular/common';
+import {AsyncPipe, JsonPipe, NgFor, NgIf} from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe],
+  imports: [AsyncPipe, JsonPipe, RouterOutlet, HttpClientModule, NgFor, NgIf],
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  selectedStep: number = 0;
-  isCarConfigAvailable: boolean = false;
-  isCarSummaryAvailable: boolean = false;
+  selectedStep: number = 1;
+  isCarConfigAvailable: boolean = true;
+  isCarSummaryAvailable: boolean = true;
+  selectedModel: string = 'default';
+
+  constructor(){}
+
+  onModelSelected(model: string){
+    this.selectedModel = model;
+    this.isCarConfigAvailable = false;
+  }
+
 
   onCarConfigChanged(isCarConfigAvailable: boolean){
     this.isCarConfigAvailable = isCarConfigAvailable;

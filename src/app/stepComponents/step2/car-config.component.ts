@@ -2,6 +2,8 @@ import {Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'car-config',
+  templateUrl: './car-config.component.html',
+  styleUrls: ['./car-config.component.scss'],
 })
 export class CarConfigComponent {
   @Output() carConfigFlag = new EventEmitter<boolean>();

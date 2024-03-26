@@ -1,9 +1,9 @@
-<div>
+
     <h3>Step 2: Select your config and options<h3>
 
     <div>
         <label>Config: </label>
-        <select id="configSelect" (change)="onCarSelected($event.target.value)">
+        <select id="configSelect">
             <option value="volvo"> Volvo </option>
             <option value="saab"> Saab </option>
             <option value="fiat"> Fiat </option>
@@ -14,10 +14,9 @@
     </div>
     <div>
        <label>Tow hitch? </label>
-       <input type="checkbox" id="includeTow" (change)="onOptionSelected('includeTow', $event.target.checked)">
+       <input type="checkbox" id="includeTow">
     </div>
     <div>
         <label>yoke steering wheel? </label>
-        <input type="checkbox" id="includeYoke" (change)="onOptionSelected('includeYoke', $event.target.checked)">
+        <input type="checkbox" id="includeYoke">
      </div>
-</div>
