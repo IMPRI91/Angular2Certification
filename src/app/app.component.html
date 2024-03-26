@@ -1,0 +1,7 @@
+<button id="step1" (click)="selectedStep = 1">Step 1</button>
+<button id="step2" (click)="selectedStep = 2" [disabled]="isCarConfigAvailable">Step 2</button>
+<button id="step3" (click)="selectedStep = 3" [disabled]="isCarSummaryAvailable">Step 3</button>
+
+<!--<car-model *ngIf="selectedStep === 1" (carModelFlag)="onCarConfigChanged($event)"></car-model>
+<car-config *ngIf="selectedStep === 2" (carConfigFlag)="onCarSummaryChanged($event)"></car-config>
+<car-summary *ngIf="selectedStep === 3"></car-summary>-->
