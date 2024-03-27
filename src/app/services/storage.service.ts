@@ -1,11 +1,24 @@
-export abstract class StorageService<T> {
-    constructor(private readonly key: string){}
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
-    public save(value: T){
-        localStorage.setItem(this.key, JSON.stringify(value));
+@Injectable({
+    providedIn: 'root'
+  })
+export class StorageService {
+    constructor(){}
+
+    private dataSubject = new Subject<string>();
+    data$ = this.dataSubject.asObservable();
+
+    public updateData(newData: string) {
+        this.dataSubject.next(newData);
+    }
+/*
+    public saveData(key: string, data: string){
+        localStorage.setItem(this.key, JSON.stringify(data));
     }
 
-    public getData(): T | null {
+    public getData(key: string): string {
         let model = localStorage.getItem(this.key);
         return model ? JSON.parse(model) : null;
     }
@@ -13,7 +26,7 @@ export abstract class StorageService<T> {
     public remove(){
         localStorage.removeItem(this.key);
     }
-
+*/
     public clear(){
         localStorage.clear();
     }

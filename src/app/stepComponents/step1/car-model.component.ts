@@ -2,6 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { CarModel, ColorModel } from '../../models/carmodel';
 import { CarConfigService } from '../../services/carconfig.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-car-model',
@@ -16,7 +17,7 @@ export class CarModelComponent implements OnInit{
   carModels?: CarModel[];
   carColors?: ColorModel[];
 
-  constructor(private readonly service: CarConfigService){}
+  constructor(private readonly storageService: StorageService, private readonly service: CarConfigService){}
 
   ngOnInit(): void {
     console.log("ON INIT------------" );
@@ -36,14 +37,15 @@ export class CarModelComponent implements OnInit{
     changeImage(){
       this.selectedCarImage = this.imageURL+''+this.selectedModel+'/'+ this.selectedColor+'.jpg';
       console.log('NEW IMAGE:'+ this.selectedCarImage);
-      //this.emitValue();
     }
 
 
 
-  selectModel(selectedModel: string){
-    if(selectedModel){
-      console.log("MODEL SELECTED");
+    onCarModelChange(selectedCarModel: string){
+    if(selectedCarModel !== 'default'){
+      this.storageService.updateData(selectedCarModel);
+      //this.storageService.saveData('model', selectedCarModel);
+      //this.storageService.saveData('color', selectedCarModel);
     }
     
   }

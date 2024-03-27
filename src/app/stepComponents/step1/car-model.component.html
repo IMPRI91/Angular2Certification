@@ -2,7 +2,7 @@
 
     <div>
         <label>Model: </label>
-        <select id="modelSelect">
+        <select id="modelSelect" [(ngModel)]="selectedModel" (ngModelChange)="onCarModelChange(selectedModel)">
             <option value="default"> Choose Model </option>
             <option *ngFor="let model of carModels" [value]="model.code"> {{model.description}} </option>
         </select>
