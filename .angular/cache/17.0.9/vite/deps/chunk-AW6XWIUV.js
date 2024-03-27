@@ -11913,6 +11913,8 @@ checkGlobals();
 
 export {
   invariant,
+  isNodeProcess,
+  until,
   devUtils,
   SetupApi,
   RequestHandler,
@@ -11920,7 +11922,6 @@ export {
   decodeBuffer,
   toArrayBuffer,
   isResponseWithoutBody,
-  isNodeProcess,
   IS_PATCHED_MODULE,
   Interceptor,
   BatchInterceptor,
@@ -11931,8 +11932,6 @@ export {
   http,
   GraphQLHandler,
   graphql2 as graphql,
-  until,
-  handleRequest,
   HttpResponse,
   SET_TIMEOUT_MAX_ALLOWED_INT,
   MIN_SERVER_RESPONSE_TIME,
@@ -11940,7 +11939,8 @@ export {
   NODE_SERVER_RESPONSE_TIME,
   delay,
   bypass,
-  passthrough
+  passthrough,
+  handleRequest
 };
 /*! Bundled license information:
 
@@ -11968,4 +11968,4 @@ export {
      *)
   *)
 */
-//# sourceMappingURL=chunk-Y4T7DYGT.js.map
+//# sourceMappingURL=chunk-AW6XWIUV.js.map

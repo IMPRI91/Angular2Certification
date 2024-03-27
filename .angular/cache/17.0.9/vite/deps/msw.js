@@ -17,7 +17,7 @@ import {
   http,
   matchRequestUrl,
   passthrough
-} from "./chunk-Y4T7DYGT.js";
+} from "./chunk-AW6XWIUV.js";
 import "./chunk-HSNDBVJ3.js";
 export {
   GraphQLHandler,

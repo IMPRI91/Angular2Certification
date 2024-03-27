@@ -1,21 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
-    private apiUrl = 'https://interstate21.com/tesla-app/images/';
-
-    constructor(private readonly client: HttpClient){}
-    //constructor(){}
-    getModels(){
-        console.log("Joined the service");
-        return this.client.get<any>(this.apiUrl);
-        //return this.client.get<any>(this.apiUrl + 'models');
+    private valueSubject = new Subject<string>();
+    value$ = this.valueSubject.asObservable();
+  
+    emitValue(value: string) {
+      this.valueSubject.next(value);
     }
-
-    // getColors(): Observable<any> {
-    //     return this.client.get<any>(this.apiUrl + 'colors');
-    // }
 }

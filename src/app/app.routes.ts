@@ -4,8 +4,8 @@ import { CarSummaryComponent } from './stepComponents/step3/car-summary.componen
 import { CarConfigComponent } from './stepComponents/step2/car-config.component';
 
 export const routes: Routes = [
-        {path: '', component: CarModelComponent},
         {path: 'model', component: CarModelComponent},
         {path: 'configuration', component: CarConfigComponent},
-        {path: 'summary', component: CarSummaryComponent}
+        {path: 'summary', component: CarSummaryComponent},
+        {path: '', redirectTo: '/model', pathMatch:'full'}
 ];
