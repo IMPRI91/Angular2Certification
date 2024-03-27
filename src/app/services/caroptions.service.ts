@@ -19,10 +19,4 @@ export class CarConfigService {
     );
   }
 
-    /*private valueSubject = new Subject<string>();
-    value$ = this.valueSubject.asObservable();
-  
-    emitValue(value: string) {
-      this.valueSubject.next(value);
-    }*/
 }

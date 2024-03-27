@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CarModel } from '../../models/carmodel';
+import { CarModel, ColorModel } from '../../models/carmodel';
 import { CarConfigService } from '../../services/carconfig.service';
 
 @Component({
@@ -9,31 +9,27 @@ import { CarConfigService } from '../../services/carconfig.service';
   styleUrls: ['./car-model.component.scss'],
 })
 export class CarModelComponent implements OnInit{
-  models: any[] = [1,2,3,4];
-  colors: any[] = [];
   imageURL: string = 'https://interstate21.com/tesla-app/images/';
   selectedModel: string = 'default';
   selectedColor: string = 'black';
   selectedCarImage: string = '';
-  carModels?: Observable<CarModel[]>;
-
-
-  private valueSubject = new Subject<string>();
-  value$ = this.valueSubject.asObservable();
+  carModels?: CarModel[];
+  carColors?: ColorModel[];
 
   constructor(private readonly service: CarConfigService){}
 
   ngOnInit(): void {
     console.log("ON INIT------------" );
-    /*this.service.getCarsModels().subscribe(
+    this.service.getCarsModels().subscribe(
       (carModels: CarModel[]) => {
           this.carModels = carModels;
+          this.carColors = carModels[0].colors;
           console.log("CARMODEL" + this.carModels.length);        
       }
-    );*/
+    );
 
 
-    this.carModels = this.service.getCarsModels(); 
+    /*this.carModels = this.service.getCarsModels(); */
     
    }
 

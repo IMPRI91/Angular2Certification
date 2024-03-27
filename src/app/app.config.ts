@@ -6,5 +6,5 @@ import { CarConfigService } from './services/carconfig.service';
 import { CarConfigStorageService } from './services/carconfig-storage.service';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), CarConfigService, CarConfigStorageService]
+  providers: [provideRouter(routes)]
 };

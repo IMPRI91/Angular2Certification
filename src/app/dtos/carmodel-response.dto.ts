@@ -9,7 +9,3 @@ export type ColorModelDTO = {
     description: string;
     price: number;
 }
-
-export type CarModelResponseDTO = {
-    models: CarModelDTO[];
-}

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { CarModel } from '../models/carmodel';
-import { CarModelResponseDTO } from '../dtos/carmodel-response.dto';
+import { CarModelDTO } from '../dtos/carmodel-response.dto';
 import { CarModelMapper } from './mappers/carmodel.mapper';
 
 @Injectable()
@@ -11,16 +11,10 @@ export class CarConfigService {
   constructor(private readonly http: HttpClient){}
 
   getCarsModels(): Observable<CarModel[]>{
-    return this.http.get<CarModelResponseDTO>('/models').pipe(
-      map((carModelResponseDto) =>
-      {
-      if(carModelResponseDto.models){
-        return carModelResponseDto.models.map(CarModelMapper.toModel);
-      }
-      else{
-        return [];
-      }      
-    })
+    return this.http.get<CarModelDTO[]>('/models').pipe(
+      map((carModelResponseDto: CarModelDTO[]) =>
+      carModelResponseDto.map(CarModelMapper.toModel))
+ 
     );
   }
 

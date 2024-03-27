@@ -7,14 +7,16 @@ import { CarConfigService } from './services/carconfig.service';
 import { CarConfigStorageService } from './services/carconfig-storage.service';
 import { CarModel } from './models/carmodel';
 import { FormsModule } from '@angular/forms';
+import { CarModelModule } from './stepComponents/step1/car-model.module';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule, CarModelModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [CarConfigService, CarConfigStorageService],
 })
 export class AppComponent implements OnInit {
   imageURL: string | null = null;

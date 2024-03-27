@@ -4,11 +4,11 @@
         <label>Model: </label>
         <select id="modelSelect">
             <option value="default"> Choose Model </option>
-            <option *ngFor="let model of carModels | async" [value]="model.code"> {{model.description}} </option>
+            <option *ngFor="let model of carModels" [value]="model.code"> {{model.description}} </option>
         </select>
         <button id="step1" (click)="changeImage()"></button>
-        <!--<label>Color: </label>
+        <label>Color: </label>
         <select id="colorSelect">
-            <option *ngFor="let color of colors" [value]="color.description"> {{color.description}} </option>
-        </select>-->
+            <option *ngFor="let color of carColors" [value]="color.description"> {{color.description}} </option>
+        </select>
     </div>
