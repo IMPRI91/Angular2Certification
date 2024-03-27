@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {AsyncPipe, CommonModule, JsonPipe, NgFor, NgIf} from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './services/appservice.component';
-import { Subscription } from 'rxjs';
+//import { ApiService } from './services/appservice.component';
+//import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,10 +12,10 @@ import { Subscription } from 'rxjs';
   imports: [CommonModule, AsyncPipe, JsonPipe, RouterOutlet, HttpClientModule, NgFor, NgIf, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [ApiService],
+//  providers: [ApiService],
 })
 export class AppComponent {
-  private subscription: Subscription;
+  //private subscription: Subscription;
   imageURL: string | null = null;
   selectedStep: number = 1;
   isCarConfigAvailable: boolean = true;
@@ -23,7 +23,7 @@ export class AppComponent {
   selectedModel: string = 'default';
  
 
-  constructor(private dataService: ApiService){
+  /*constructor(private dataService: ApiService){
     this.subscription = this.dataService.value$.subscribe(value => {
       this.imageURL = value;
       this.isCarConfigAvailable = false;
@@ -34,7 +34,7 @@ export class AppComponent {
   ngOnDestroy() {
     // Unsubscribe from the subscription to avoid memory leaks
     this.subscription.unsubscribe();
-  }
+  }*/
   
   onModelSelected(model: string){
     this.selectedModel = model;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { ApiService } from '../../services/appservice.component';
+//import { ApiService } from '../../services/appservice.component';
 
 @Component({
   selector: 'app-car-model',
@@ -20,7 +20,7 @@ export class CarModelComponent implements OnInit{
   private valueSubject = new Subject<string>();
   value$ = this.valueSubject.asObservable();
 
-  constructor(private http: HttpClient, private dataService: ApiService){}
+  constructor(private http: HttpClient/*, private dataService: ApiService*/){}
 
   ngOnInit(): void {
     
@@ -28,14 +28,14 @@ export class CarModelComponent implements OnInit{
     
    }
 
-   emitValue() {
+/*   emitValue() {
     this.dataService.emitValue(this.selectedCarImage);
     }
-
+*/
     changeImage(){
       this.selectedCarImage = this.imageURL+''+this.selectedModel+'/'+ this.selectedColor+'.jpg';
       console.log('NEW IMAGE:'+ this.selectedCarImage);
-      this.emitValue();
+      //this.emitValue();
     }
 
   retrieveModels(): void{
