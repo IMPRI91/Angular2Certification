@@ -1,40 +1,37 @@
-import {Component} from '@angular/core';
-import {AsyncPipe, CommonModule, JsonPipe, NgFor, NgIf} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-//import { ApiService } from './services/appservice.component';
-//import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { CarConfigService } from './services/carconfig.service';
+import { CarConfigStorageService } from './services/carconfig-storage.service';
+import { CarModel } from './models/carmodel';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, AsyncPipe, JsonPipe, RouterOutlet, HttpClientModule, NgFor, NgIf, RouterModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-//  providers: [ApiService],
+  providers: [CarConfigService, CarConfigStorageService],
 })
-export class AppComponent {
-  //private subscription: Subscription;
+export class AppComponent implements OnInit {
   imageURL: string | null = null;
   selectedStep: number = 1;
   isCarConfigAvailable: boolean = true;
   isCarSummaryAvailable: boolean = true;
   selectedModel: string = 'default';
+  carModels?: Observable<CarModel[]>;
  
 
-  /*constructor(private dataService: ApiService){
-    this.subscription = this.dataService.value$.subscribe(value => {
-      this.imageURL = value;
-      this.isCarConfigAvailable = false;
-      console.log('Value received in AppComponent:', value);
-    });
+  constructor(private readonly storageService: CarConfigStorageService, private readonly service: CarConfigService){}
+
+  public ngOnInit(): void {
+    this.storageService.clear();
   }
 
-  ngOnDestroy() {
-    // Unsubscribe from the subscription to avoid memory leaks
-    this.subscription.unsubscribe();
-  }*/
   
   onModelSelected(model: string){
     this.selectedModel = model;

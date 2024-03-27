@@ -2,9 +2,9 @@
 
     <div>
         <label>Model: </label>
-        <select id="modelSelect">
+        <select id="modelSelect" *ngIf="carModels | async as models">
             <option value="default"> Choose Model </option>
-             <!--<option *ngFor="let model of models" [value]="model.code"> {{model.description}} </option>-->
+            <option *ngFor="let model of models" [value]="model.code"> {{model.description}} </option>
         </select>
         <button id="step1" (click)="changeImage()"></button>
         <!--<label>Color: </label>
