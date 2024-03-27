@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
   imports: [CommonModule, AsyncPipe, JsonPipe, RouterOutlet, HttpClientModule, NgFor, NgIf, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [ApiService],
 })
 export class AppComponent {
   private subscription: Subscription;
