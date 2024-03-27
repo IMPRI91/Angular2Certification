@@ -1,5 +1,5 @@
 import {Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CarModel } from '../../models/carmodel';
 import { CarConfigService } from '../../services/carconfig.service';
 
@@ -15,7 +15,7 @@ export class CarModelComponent implements OnInit{
   selectedModel: string = 'default';
   selectedColor: string = 'black';
   selectedCarImage: string = '';
-  carModels?: CarModel[];
+  carModels?: Observable<CarModel[]>;
 
 
   private valueSubject = new Subject<string>();
@@ -24,15 +24,16 @@ export class CarModelComponent implements OnInit{
   constructor(private readonly service: CarConfigService){}
 
   ngOnInit(): void {
-    
-    this.service.getCarsModels().subscribe(
+    console.log("ON INIT------------" );
+    /*this.service.getCarsModels().subscribe(
       (carModels: CarModel[]) => {
-        if(carModels){
           this.carModels = carModels;
-        }
-        
+          console.log("CARMODEL" + this.carModels.length);        
       }
-    );
+    );*/
+
+
+    this.carModels = this.service.getCarsModels(); 
     
    }
 

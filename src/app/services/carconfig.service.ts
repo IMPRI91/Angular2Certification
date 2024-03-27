@@ -13,8 +13,14 @@ export class CarConfigService {
   getCarsModels(): Observable<CarModel[]>{
     return this.http.get<CarModelResponseDTO>('/models').pipe(
       map((carModelResponseDto) =>
-      carModelResponseDto.models.map(CarModelMapper.toModel)
-      )
+      {
+      if(carModelResponseDto.models){
+        return carModelResponseDto.models.map(CarModelMapper.toModel);
+      }
+      else{
+        return [];
+      }      
+    })
     );
   }
 

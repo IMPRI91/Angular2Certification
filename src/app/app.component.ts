@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [CarConfigService, CarConfigStorageService],
 })
 export class AppComponent implements OnInit {
   imageURL: string | null = null;
