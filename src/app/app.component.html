@@ -1,10 +1,13 @@
 
 <main class="container py-3">
-<button id="step1" [routerLink]="'/model'">Step 1</button>
-<button id="step2" [routerLink]="'/configuration'" [disabled]="isCarConfigAvailable">Step 2</button>
-<button id="step3" [routerLink]="'/summary'" [disabled]="isCarSummaryAvailable">Step 3</button>
+    <div class="custom-container">
+        <button id="step1" class="step-button" [routerLink]="'/model'">Step 1</button>
+        <button id="step2" class="step-button" [routerLink]="'/configuration'" [disabled]="isCarConfigAvailable">Step 2</button>
+        <button id="step3" class="step-button" [routerLink]="'/summary'" [disabled]="isCarSummaryAvailable">Step 3</button>
+    </div>
 
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
-<img *ngIf="imageURL !== ''" [src]="imageURL">
+    <img *ngIf="imageURL !== ''" [src]="imageURL">
+
 </main>
