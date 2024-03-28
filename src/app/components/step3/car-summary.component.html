@@ -10,7 +10,8 @@
             <label>Range: {{carRange}} - Max speed: {{carSpeed}}</label>
         </div>
         <div>
-            <label>{{carColor}}</label>  
+            <label>{{carColor}}</label>
+            <label>{{colorCost | currency:'USD':'symbol':'1.2-2'}}</label>   
         </div>
         <div *ngIf="hasHitch">
             <label>Tow Hitch Package</label>
