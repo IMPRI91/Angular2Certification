@@ -23,6 +23,7 @@ import { CarSummaryModule } from './components/step3/car-summary.module';
 })
 export class AppComponent {
   imageURL: string | null = null;
+  imagesSource: string = "https://interstate21.com/tesla-app/images/";
 
   isCarConfigAvailable: boolean = true;
   isCarSummaryAvailable: boolean = true;
@@ -64,7 +65,7 @@ export class AppComponent {
   
   carModelSelected(model: string, color: string){
     if(model != 'default'){
-      this.imageURL = "https://interstate21.com/tesla-app/images/" + model +"/"+color+".jpg";
+      this.imageURL = this.imagesSource + '' + model +"/"+color+".jpg";
       this.isCarConfigAvailable = false;
       this.isCarSummaryAvailable = true;
     }
