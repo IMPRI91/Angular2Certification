@@ -1,3 +1,9 @@
+
+export type CarOptions = {
+    configs: Options[];
+    towHitch: boolean;
+    yoke: boolean;
+}
 export type Options = {
     id: number;
     description: string;
@@ -6,9 +12,4 @@ export type Options = {
     price: number;
 }
 
-export type CarOptions = {
-    options: Options[];
-    towHitch: boolean;
-    yoke: boolean;
-}
 

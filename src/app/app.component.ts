@@ -10,12 +10,13 @@ import { CarModelModule } from './stepComponents/step1/car-model.module';
 import { StorageService } from './services/storage.service';
 import { CarConfigModule } from './stepComponents/step2/car-config.module';
 import { CarOptionsService } from './services/caroptions.service';
+import { CarSummaryModule } from './stepComponents/step3/car-summary.module';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule, CarModelModule, CarConfigModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule, CarModelModule, CarConfigModule, CarSummaryModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [CarConfigService, CarOptionsService, StorageService],
@@ -41,7 +42,10 @@ export class AppComponent implements OnInit {
             break;
             case 'color':
               this.carModelSelected(this.receivedData, this.storageService.getData('color'));
-              break;            
+              break;
+            case 'config':
+              this.isCarSummaryAvailable = false;
+              break;              
         }
       
     });
@@ -65,6 +69,7 @@ export class AppComponent implements OnInit {
     else{
       this.imageURL = '';
       this.isCarConfigAvailable = true;
+      this.isCarSummaryAvailable = true;
     }
     this.selectedModel = model;
 

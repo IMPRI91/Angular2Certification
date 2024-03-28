@@ -13,7 +13,7 @@ export class StorageService {
     private dataSubject = new Subject<Map<string,string>>();
     carInformation = this.dataSubject.asObservable();
 
-    public saveData(key: string, data: string){
+    public saveData(key: string, data: string | number){
         localStorage.setItem(key, JSON.stringify(data));
         this.triggerStorageEvent(key);
     }
@@ -47,7 +47,6 @@ export class StorageService {
           storageArea: localStorage,
           url: window.location.href
         });
-        console.log("FIRE THE EVENT");
         this.keyUpdatesSubject.next(key);
       }
       

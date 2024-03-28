@@ -41,27 +41,35 @@ export class CarModelComponent implements OnInit{
 
     onCarModelChange(selectedCarModel: string){
     if(selectedCarModel !== 'default'){
-      const currentCarColors = this.carModels.find(model => model.code === selectedCarModel);
-      if(currentCarColors){
-        this.selectedColor = currentCarColors.colors[0].code;
-        this.carColors = currentCarColors.colors;
-        this.storageService.saveData('color',this.selectedColor); 
+      const currentCarModel = this.carModels.find(model => model.code === selectedCarModel);
+      if(currentCarModel){        
+        this.selectedColor = currentCarModel.colors[0].code;
+        this.carColors = currentCarModel.colors;
+        this.storageService.saveData('color',this.selectedColor);
+        this.storageService.saveData('colorprice',currentCarModel.colors[0].price);
+        this.storageService.saveData('colordesc',currentCarModel.colors[0].description);
+        this.storageService.saveData('modeldesc',currentCarModel.description); 
       }
       if(!this.showColors){
         this.showColors = true;        
-      }      
+      }     
       
     }
     else{
       this.showColors = false;
+      this.storageService.saveData('modeldesc','');
     }
-    this.storageService.saveData('model',selectedCarModel);
-    
+    this.storageService.saveData('model',selectedCarModel);    
     
   }
 
   onCarColorChange(selectedCarColor: string){
-    this.storageService.saveData('color',selectedCarColor); 
+    this.storageService.saveData('color',selectedCarColor);
+    const currentColor = this.carColors.find(color => color.code === selectedCarColor);
+    if(currentColor){  
+      this.storageService.saveData('colorprice',currentColor.price);
+      this.storageService.saveData('colordesc',currentColor.description);
+    } 
   }
 
 }

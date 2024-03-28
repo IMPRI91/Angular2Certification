@@ -9,7 +9,7 @@
         </select>
     </div>
     <div *ngIf="selectedCarConfig !== 0">
-        <label>Range: </label>
+        <label>Range: {{selectedRange}} - Max speed: {{selectedSpeed}} - Cost: {{selectedPrice | currency:'USD':'symbol':'1.2-2'}} </label>
     </div>
     <div *ngIf="showHitch">
        <label>Tow hitch? </label>

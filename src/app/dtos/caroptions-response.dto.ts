@@ -1,3 +1,9 @@
+export type CarOptionsResponseDTO = {
+    configs: CarOptionsDTO[];
+    towHitch: boolean;
+    yoke: boolean;
+}
+
 export type CarOptionsDTO = {
     id: number;
     description: string;
@@ -6,9 +12,4 @@ export type CarOptionsDTO = {
     price: number;
 }
 
-export type CarOptionsResponseDTO = {
-    options: CarOptionsDTO[];
-    towHitch: boolean;
-    yoke: boolean;
-}
 

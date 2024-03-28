@@ -1,8 +1,20 @@
 
     <h3>Step 3: Summary<h3>
-    <h2>Your car Name<h2>
+    <h2>Your car {{carDescription}}<h2>
     <div>
-        <label>car information: </label>
+        <div>
+            <label>{{carConfiguration}}</label>
+        </div>
+        <div>
+            <label>Range: {{carRange}} - Max speed: {{carSpeed}}</label>
+        </div>
+        <div>
+            <label>{{carColor}}</label>  
+        </div>          
         <hr>
-        <label>TOTAL COST</label>
+        <div>
+            <label>TOTAL COST</label>
+            <label>{{carTotalCost | currency:'USD':'symbol':'1.2-2'}}</label>
+        </div>
+    </div>
         <hr>

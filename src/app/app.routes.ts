@@ -7,5 +7,5 @@ export const routes: Routes = [
         {path: 'model', component: CarModelComponent},
         {path: 'configuration', component: CarConfigComponent},
         {path: 'summary', component: CarSummaryComponent},
-        {path: '', redirectTo: '/model', pathMatch:'full'}
+        {path: '**', redirectTo: '/model', pathMatch:'full'}
 ];

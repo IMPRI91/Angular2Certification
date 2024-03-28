@@ -14,26 +14,49 @@ export class CarConfigComponent {
   carOptions: Options[] = [];
   showHitch: boolean = false;
   showSteering: boolean = false;
+  selectedRange: number = 0;
+  selectedPrice: number = 0;
+  selectedSpeed: number = 0;
 
   constructor(private readonly storageService: StorageService, private readonly service: CarOptionsService){}
 
   ngOnInit(): void {
     this.service.getCarOptions(this.storageService.getData('model')).subscribe(
       (carOptions: CarOptions) => {
-        console.log("OPTIONS: ", carOptions);
-          this.carOptions = carOptions.options;
+          this.carOptions = carOptions.configs;
           this.showHitch =  carOptions.towHitch;
           this.showSteering = carOptions.yoke;
+          if(this.storageService.getData('config')){ 
+            console.log("I JOINED IN" );
+            this.selectedCarConfig = +this.storageService.getData('config');
+            console.log("Select:",this.selectedCarConfig );
+            const currentCarConfig = this.carOptions.find(cfg => cfg.id === +this.selectedCarConfig);
+            if(currentCarConfig){
+              this.selectedRange = +this.storageService.getData('range');
+              this.selectedPrice = +this.storageService.getData('configprice');
+              this.selectedSpeed = +this.storageService.getData('speed');
+            }       
+          }
+          else{
+            this.selectedCarConfig = 0;
+          } 
       }
     );
     
    }
 
-   onCarConfigChange(option: number): void{
-    console.log('Selected car:', option);
-    const currentCarColors = this.carOptions.find(cfg => cfg.id === option);
-   // if(currentCarColors){
-   // this.storageService.saveData('config',''+option);
+   onCarConfigChange(config: number): void{
+    const currentCarConfig = this.carOptions.find(cfg => cfg.id === +config);
+    if(currentCarConfig){
+      this.selectedRange = currentCarConfig.range;
+      this.selectedPrice = currentCarConfig.price;
+      this.selectedSpeed = currentCarConfig.speed;
+      this.storageService.saveData('config',currentCarConfig.id);
+      this.storageService.saveData('configdesc',currentCarConfig.description);
+      this.storageService.saveData('configprice',currentCarConfig.price);
+      this.storageService.saveData('range',currentCarConfig.range);
+      this.storageService.saveData('speed',currentCarConfig.speed);
+    }
   }
 
 }
