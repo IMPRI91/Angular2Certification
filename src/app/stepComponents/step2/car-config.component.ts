@@ -1,4 +1,7 @@
-import {Component, EventEmitter, Output } from '@angular/core';
+import {Component} from '@angular/core';
+import { CarOptionsService } from '../../services/caroptions.service';
+import { StorageService } from '../../services/storage.service';
+import { CarOptions, Options } from '../../models/caroptions';
 
 @Component({
   selector: 'car-config',
@@ -6,23 +9,31 @@ import {Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./car-config.component.scss'],
 })
 export class CarConfigComponent {
-  @Output() carConfigFlag = new EventEmitter<boolean>();
-  eventEmitted: boolean = false;
 
-  onCarSelected(car: string): void{
-    console.log('Selected car:', car);
-    if(!this.eventEmitted){
-      this.carConfigFlag.emit(true);
-      this.eventEmitted = true;
-    }
-  }
+  selectedCarConfig: number = 0;
+  carOptions: Options[] = [];
+  showHitch: boolean = false;
+  showSteering: boolean = false;
 
-  onOptionSelected(optionId: string, isChecked: boolean): void{
-    console.log('Option selected: ${isChecked}');
-    if(!this.eventEmitted){
-      this.carConfigFlag.emit(true);
-      this.eventEmitted = true;
-    }
+  constructor(private readonly storageService: StorageService, private readonly service: CarOptionsService){}
+
+  ngOnInit(): void {
+    this.service.getCarOptions(this.storageService.getData('model')).subscribe(
+      (carOptions: CarOptions) => {
+        console.log("OPTIONS: ", carOptions);
+          this.carOptions = carOptions.options;
+          this.showHitch =  carOptions.towHitch;
+          this.showSteering = carOptions.yoke;
+      }
+    );
+    
+   }
+
+   onCarConfigChange(option: number): void{
+    console.log('Selected car:', option);
+    const currentCarColors = this.carOptions.find(cfg => cfg.id === option);
+   // if(currentCarColors){
+   // this.storageService.saveData('config',''+option);
   }
 
 }

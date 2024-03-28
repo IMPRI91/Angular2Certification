@@ -3,20 +3,19 @@
 
     <div>
         <label>Config: </label>
-        <select id="configSelect">
-            <option value="volvo"> Volvo </option>
-            <option value="saab"> Saab </option>
-            <option value="fiat"> Fiat </option>
+        <select id="configSelect" [(ngModel)]="selectedCarConfig" (ngModelChange)="onCarConfigChange(selectedCarConfig)">
+            <option value=0> Choose... </option>
+            <option *ngFor="let option of carOptions" [value]="option.id"> {{option.description}} </option>
         </select>
     </div>
-    <div>
+    <div *ngIf="selectedCarConfig !== 0">
         <label>Range: </label>
     </div>
-    <div>
+    <div *ngIf="showHitch">
        <label>Tow hitch? </label>
        <input type="checkbox" id="includeTow">
     </div>
-    <div>
+    <div *ngIf="showSteering">
         <label>yoke steering wheel? </label>
         <input type="checkbox" id="includeYoke">
      </div>

@@ -7,14 +7,14 @@ import { CarOptions } from '../models/caroptions';
 
 
 @Injectable()
-export class CarConfigService {
+export class CarOptionsService {
 
   constructor(private readonly http: HttpClient){}
 
-  getCarOptions(id: string): Observable<CarOptions[]>{
-    return this.http.get<CarOptionsResponseDTO>('/options/${id}').pipe(
+  getCarOptions(id: string): Observable<CarOptions>{
+    return this.http.get<CarOptionsResponseDTO>('/options/'+id).pipe(
       map((carModelResponseDto) =>{
-        return [CarOptionsMapper.toModel(carModelResponseDto)];
+        return CarOptionsMapper.toModel(carModelResponseDto);
       })
     );
   }

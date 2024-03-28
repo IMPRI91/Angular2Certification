@@ -1,33 +1,55 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
   })
 export class StorageService {
-    constructor(){}
+    private keyUpdatesSubject = new BehaviorSubject<string | null>(null);
 
-    private dataSubject = new Subject<string>();
-    data$ = this.dataSubject.asObservable();
-
-    public updateData(newData: string) {
-        this.dataSubject.next(newData);
+    constructor(){
     }
-/*
+
+    private dataSubject = new Subject<Map<string,string>>();
+    carInformation = this.dataSubject.asObservable();
+
     public saveData(key: string, data: string){
-        localStorage.setItem(this.key, JSON.stringify(data));
+        localStorage.setItem(key, JSON.stringify(data));
+        this.triggerStorageEvent(key);
+    }
+
+    public updateData(key: string){
+        this.triggerStorageEvent(key);
     }
 
     public getData(key: string): string {
-        let model = localStorage.getItem(this.key);
-        return model ? JSON.parse(model) : null;
+        let carInformation = localStorage.getItem(key);
+        return carInformation ? JSON.parse(carInformation) : null;
     }
 
-    public remove(){
-        localStorage.removeItem(this.key);
+    public remove(key: string){
+        localStorage.removeItem(key);
+        this.triggerStorageEvent(key);
     }
-*/
+
     public clear(){
         localStorage.clear();
     }
+
+    subscribeToKeyUpdates(): BehaviorSubject<string | null> {
+        return this.keyUpdatesSubject;
+      }
+
+      private triggerStorageEvent(key: string): void {
+        const storageEvent = new StorageEvent('storage', {
+          key: key,
+          newValue: localStorage.getItem(key),
+          storageArea: localStorage,
+          url: window.location.href
+        });
+        console.log("FIRE THE EVENT");
+        this.keyUpdatesSubject.next(key);
+      }
+      
+
 }

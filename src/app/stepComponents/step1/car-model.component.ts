@@ -1,5 +1,4 @@
 import {Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
 import { CarModel, ColorModel } from '../../models/carmodel';
 import { CarConfigService } from '../../services/carconfig.service';
 import { StorageService } from '../../services/storage.service';
@@ -10,44 +9,59 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./car-model.component.scss'],
 })
 export class CarModelComponent implements OnInit{
-  imageURL: string = 'https://interstate21.com/tesla-app/images/';
+  showColors: boolean = false;
   selectedModel: string = 'default';
   selectedColor: string = 'black';
-  selectedCarImage: string = '';
-  carModels?: CarModel[];
-  carColors?: ColorModel[];
+  carModels: CarModel[] = [];
+  carColors: ColorModel[] = [];
 
   constructor(private readonly storageService: StorageService, private readonly service: CarConfigService){}
 
   ngOnInit(): void {
-    console.log("ON INIT------------" );
     this.service.getCarsModels().subscribe(
       (carModels: CarModel[]) => {
           this.carModels = carModels;
-          this.carColors = carModels[0].colors;
-          console.log("CARMODEL" + this.carModels.length);        
+          if(this.storageService.getData('model')){ 
+            const tempColor = this.selectedColor;
+            this.selectedModel = this.storageService.getData('model');
+            const currentCarColors = this.carModels.find(model => model.code === this.selectedModel);
+            if(currentCarColors){
+            this.carColors = currentCarColors.colors;
+            this.selectedColor = this.storageService.getData('color');
+            this.showColors = true;
+            }       
+          }
+          else{
+            this.selectedModel = 'default';
+          }      
       }
     );
-
-
-    /*this.carModels = this.service.getCarsModels(); */
     
    }
 
-    changeImage(){
-      this.selectedCarImage = this.imageURL+''+this.selectedModel+'/'+ this.selectedColor+'.jpg';
-      console.log('NEW IMAGE:'+ this.selectedCarImage);
-    }
-
-
-
     onCarModelChange(selectedCarModel: string){
     if(selectedCarModel !== 'default'){
-      this.storageService.updateData(selectedCarModel);
-      //this.storageService.saveData('model', selectedCarModel);
-      //this.storageService.saveData('color', selectedCarModel);
+      const currentCarColors = this.carModels.find(model => model.code === selectedCarModel);
+      if(currentCarColors){
+        this.selectedColor = currentCarColors.colors[0].code;
+        this.carColors = currentCarColors.colors;
+        this.storageService.saveData('color',this.selectedColor); 
+      }
+      if(!this.showColors){
+        this.showColors = true;        
+      }      
+      
     }
+    else{
+      this.showColors = false;
+    }
+    this.storageService.saveData('model',selectedCarModel);
     
+    
+  }
+
+  onCarColorChange(selectedCarColor: string){
+    this.storageService.saveData('color',selectedCarColor); 
   }
 
 }

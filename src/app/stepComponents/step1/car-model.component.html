@@ -6,9 +6,10 @@
             <option value="default"> Choose Model </option>
             <option *ngFor="let model of carModels" [value]="model.code"> {{model.description}} </option>
         </select>
-        <button id="step1" (click)="changeImage()"></button>
+        <ng-container *ngIf="showColors">
         <label>Color: </label>
-        <select id="colorSelect">
-            <option *ngFor="let color of carColors" [value]="color.description"> {{color.description}} </option>
+        <select id="colorSelect" [(ngModel)]="selectedColor" (ngModelChange)="onCarColorChange(selectedColor)">
+            <option *ngFor="let color of carColors" [value]="color.code"> {{color.description}} </option>
         </select>
+        </ng-container>
     </div>

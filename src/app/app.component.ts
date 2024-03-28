@@ -8,15 +8,17 @@ import { CarModel } from './models/carmodel';
 import { FormsModule } from '@angular/forms';
 import { CarModelModule } from './stepComponents/step1/car-model.module';
 import { StorageService } from './services/storage.service';
+import { CarConfigModule } from './stepComponents/step2/car-config.module';
+import { CarOptionsService } from './services/caroptions.service';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule, CarModelModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, HttpClientModule, RouterModule, CarModelModule, CarConfigModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [CarConfigService, StorageService],
+  providers: [CarConfigService, CarOptionsService, StorageService],
 })
 export class AppComponent implements OnInit {
   imageURL: string | null = null;
@@ -26,24 +28,27 @@ export class AppComponent implements OnInit {
   selectedModel: string = 'default';
   carModels?: Observable<CarModel[]>;
  
-  data: string = 'default';
+  receivedData: string = 'default';
   private dataSubscription: Subscription;
 
-  constructor(private readonly storageService: StorageService, private readonly service: CarConfigService){
-    this.dataSubscription = this.storageService.data$.subscribe(newData => {
-      this.data = newData;
-      if(this.data != 'default'){
-        this.imageURL = "https://interstate21.com/tesla-app/images/" + this.data +"/black.jpg";
-      }
-      else{
-        this.imageURL = '';
-      }
-
+  constructor(private readonly storageService: StorageService, private readonly service: CarConfigService){ 
+    this.storageService.clear();
+    this.dataSubscription = this.storageService.subscribeToKeyUpdates().subscribe(updatedKey => {       
+        switch (updatedKey){
+          case 'model':
+            this.receivedData = this.storageService.getData('model');
+            this.carModelSelected(this.receivedData, this.storageService.getData('color'));
+            break;
+            case 'color':
+              this.carModelSelected(this.receivedData, this.storageService.getData('color'));
+              break;            
+        }
+      
     });
   }
 
   public ngOnInit(): void {
-    this.storageService.clear();
+
   }
 
   ngOnDestroy() {
@@ -51,9 +56,18 @@ export class AppComponent implements OnInit {
   }
 
   
-  onModelSelected(model: string){
+  carModelSelected(model: string, color: string){
+    console.log("MODELOO:",model);
+    if(model != 'default'){
+      this.imageURL = "https://interstate21.com/tesla-app/images/" + model +"/"+color+".jpg";
+      this.isCarConfigAvailable = false;
+    }
+    else{
+      this.imageURL = '';
+      this.isCarConfigAvailable = true;
+    }
     this.selectedModel = model;
-    this.isCarConfigAvailable = false;
+
   }
 
 
