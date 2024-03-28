@@ -6,11 +6,11 @@ import { Observable, Subscription } from 'rxjs';
 import { CarConfigService } from './services/carconfig.service';
 import { CarModel } from './models/carmodel';
 import { FormsModule } from '@angular/forms';
-import { CarModelModule } from './stepComponents/step1/car-model.module';
+import { CarModelModule } from './components/step1/car-model.module';
 import { StorageService } from './services/storage.service';
-import { CarConfigModule } from './stepComponents/step2/car-config.module';
+import { CarConfigModule } from './components/step2/car-config.module';
 import { CarOptionsService } from './services/caroptions.service';
-import { CarSummaryModule } from './stepComponents/step3/car-summary.module';
+import { CarSummaryModule } from './components/step3/car-summary.module';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { CarSummaryModule } from './stepComponents/step3/car-summary.module';
   styleUrls: ['./app.component.scss'],
   providers: [CarConfigService, CarOptionsService, StorageService],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   imageURL: string | null = null;
 
   isCarConfigAvailable: boolean = true;
@@ -45,15 +45,16 @@ export class AppComponent implements OnInit {
               this.carModelSelected(this.receivedData, this.storageService.getData('color'));
               break;
           case 'config':
-              this.isCarSummaryAvailable = false;
+              if(this.storageService.getData('config') && JSON.parse(this.storageService.getData('config')) != 0){
+                this.isCarSummaryAvailable = false;
+              }
+              else{
+                this.isCarSummaryAvailable = true;
+              }
               break;              
         }
       
     });
-  }
-
-  public ngOnInit(): void {
-
   }
 
   ngOnDestroy() {
@@ -62,10 +63,10 @@ export class AppComponent implements OnInit {
 
   
   carModelSelected(model: string, color: string){
-    console.log("MODELOO:",model);
     if(model != 'default'){
       this.imageURL = "https://interstate21.com/tesla-app/images/" + model +"/"+color+".jpg";
       this.isCarConfigAvailable = false;
+      this.isCarSummaryAvailable = true;
     }
     else{
       this.imageURL = '';
@@ -74,14 +75,5 @@ export class AppComponent implements OnInit {
     }
     this.selectedModel = model;
 
-  }
-
-
-  onCarConfigChanged(isCarConfigAvailable: boolean){
-    this.isCarConfigAvailable = isCarConfigAvailable;
-  }
-
-  onCarSummaryChanged(isCarSummaryAvailable: boolean){
-    this.isCarSummaryAvailable = isCarSummaryAvailable;
   }
 }

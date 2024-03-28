@@ -28,16 +28,21 @@ export class CarConfigComponent {
           this.carOptions = carOptions.configs;
           this.showHitch =  carOptions.towHitch;
           this.showSteering = carOptions.yoke;
+          if(this.storageService.getData('hitch')){
+            this.selectedTow = JSON.parse(this.storageService.getData('hitch'));
+          }
+          if(this.storageService.getData('steering')){
+            this.selectedYoke = JSON.parse(this.storageService.getData('steering'));
+          }
           if(this.storageService.getData('config')){ 
-            console.log("I JOINED IN" );
-            this.selectedCarConfig = +this.storageService.getData('config');
+            this.selectedCarConfig = JSON.parse(this.storageService.getData('config'));
             console.log("Select:",this.selectedCarConfig );
             const currentCarConfig = this.carOptions.find(cfg => cfg.id === +this.selectedCarConfig);
             if(currentCarConfig){
-              this.selectedRange = +this.storageService.getData('range');
-              this.selectedPrice = +this.storageService.getData('configprice');
-              this.selectedSpeed = +this.storageService.getData('speed');
-            }       
+              this.selectedRange = JSON.parse(this.storageService.getData('range'));
+              this.selectedPrice = JSON.parse(this.storageService.getData('configprice'));
+              this.selectedSpeed = JSON.parse(this.storageService.getData('speed'));
+            }    
           }
           else{
             this.selectedCarConfig = 0;
@@ -48,17 +53,26 @@ export class CarConfigComponent {
    }
 
    onCarConfigChange(config: number): void{
-    const currentCarConfig = this.carOptions.find(cfg => cfg.id === +config);
-    if(currentCarConfig){
-      this.selectedRange = currentCarConfig.range;
-      this.selectedPrice = currentCarConfig.price;
-      this.selectedSpeed = currentCarConfig.speed;
-      this.storageService.saveData('config',currentCarConfig.id);
-      this.storageService.saveData('configdesc',currentCarConfig.description);
-      this.storageService.saveData('configprice',currentCarConfig.price);
-      this.storageService.saveData('range',currentCarConfig.range);
-      this.storageService.saveData('speed',currentCarConfig.speed);
+    if(config != 0){
+      const currentCarConfig = this.carOptions.find(cfg => cfg.id === +config);
+      if(currentCarConfig){
+        this.selectedRange = currentCarConfig.range;
+        this.selectedPrice = currentCarConfig.price;
+        this.selectedSpeed = currentCarConfig.speed;
+        this.storageService.saveData('configdesc',currentCarConfig.description);
+        this.storageService.saveData('configprice',currentCarConfig.price);
+        this.storageService.saveData('range',currentCarConfig.range);
+        this.storageService.saveData('speed',currentCarConfig.speed);
+      }
     }
+    else{
+      this.selectedCarConfig = 0;
+      this.storageService.remove('configdesc');
+      this.storageService.remove('configprice');
+      this.storageService.remove('range');
+      this.storageService.remove('speed');
+    }
+    this.storageService.saveData('config',config);
   }
 
   onCarIncludeTowChange(includeTow: boolean): void{

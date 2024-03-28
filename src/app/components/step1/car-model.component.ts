@@ -59,7 +59,10 @@ export class CarModelComponent implements OnInit{
       this.showColors = false;
       this.storageService.saveData('modeldesc','');
     }
-    this.storageService.saveData('model',selectedCarModel);    
+    this.storageService.saveData('model',selectedCarModel);
+    this.storageService.remove('hitch');
+    this.storageService.remove('steering');
+    this.storageService.remove('config');    
     
   }
 
