@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { CarConfigService } from './services/carconfig.service';
@@ -32,7 +32,8 @@ export class AppComponent implements OnInit {
   receivedData: string = 'default';
   private dataSubscription: Subscription;
 
-  constructor(private readonly storageService: StorageService, private readonly service: CarConfigService){ 
+  constructor(private router: Router,private readonly storageService: StorageService, private readonly service: CarConfigService){ 
+    this.router.navigate(['/model']);
     this.storageService.clear();
     this.dataSubscription = this.storageService.subscribeToKeyUpdates().subscribe(updatedKey => {       
         switch (updatedKey){
