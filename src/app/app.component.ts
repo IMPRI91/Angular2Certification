@@ -40,10 +40,10 @@ export class AppComponent implements OnInit {
             this.receivedData = this.storageService.getData('model');
             this.carModelSelected(this.receivedData, this.storageService.getData('color'));
             break;
-            case 'color':
+          case 'color':
               this.carModelSelected(this.receivedData, this.storageService.getData('color'));
               break;
-            case 'config':
+          case 'config':
               this.isCarSummaryAvailable = false;
               break;              
         }

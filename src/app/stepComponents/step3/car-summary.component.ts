@@ -15,6 +15,9 @@ export class CarSummaryComponent {
   carTotalCost: number = 0;
   hasHitch: boolean = false;
   hasSteering: boolean = false;
+  packagesCost: number = 1000;
+  configCost: number = 0;
+  colorCost: number = 0;
 
   constructor(private readonly storageService: StorageService){}
 
@@ -25,18 +28,19 @@ export class CarSummaryComponent {
     this.carColor = this.storageService.getData('colordesc');
     this.carRange = this.storageService.getData('range');
     this.carSpeed = this.storageService.getData('speed');
-    //this.carDescription = this.storageService.getData('colorprice');    
-    //this.hasHitch = this.storageService.getData('hitch');
-    //this.hasSteering = this.storageService.getData('steering');
+    this.configCost = JSON.parse(this.storageService.getData('configprice'));
+    this.colorCost = JSON.parse(this.storageService.getData('colorprice'));    
+    this.hasHitch = JSON.parse(this.storageService.getData('hitch'));
+    this.hasSteering = JSON.parse(this.storageService.getData('steering'));
 
     //Adding Total
-    this.carTotalCost = (+this.storageService.getData('colorprice')) + (+this.storageService.getData('configprice'));
+    this.carTotalCost = this.colorCost + this.configCost;
     //Adding hitching and steering default costs$1,000
     if(this.hasHitch){      
-      this.carTotalCost += 1000;
+      this.carTotalCost += this.packagesCost;
     }
     if(this.hasSteering){
-      this.carTotalCost += 1000;
+      this.carTotalCost += this.packagesCost;
     }
    }
 

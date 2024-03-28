@@ -13,9 +13,9 @@
     </div>
     <div *ngIf="showHitch">
        <label>Tow hitch? </label>
-       <input type="checkbox" id="includeTow">
+       <input type="checkbox" id="includeTow" [(ngModel)]="selectedTow" (ngModelChange)="onCarIncludeTowChange(selectedTow)">
     </div>
     <div *ngIf="showSteering">
         <label>yoke steering wheel? </label>
-        <input type="checkbox" id="includeYoke">
+        <input type="checkbox" id="includeYoke" [(ngModel)]="selectedYoke" (ngModelChange)="onCarIncludeYokeChange(selectedYoke)">
      </div>

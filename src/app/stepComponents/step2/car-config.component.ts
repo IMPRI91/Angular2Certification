@@ -11,6 +11,8 @@ import { CarOptions, Options } from '../../models/caroptions';
 export class CarConfigComponent {
 
   selectedCarConfig: number = 0;
+  selectedTow: boolean = false;
+  selectedYoke: boolean = false;
   carOptions: Options[] = [];
   showHitch: boolean = false;
   showSteering: boolean = false;
@@ -57,6 +59,14 @@ export class CarConfigComponent {
       this.storageService.saveData('range',currentCarConfig.range);
       this.storageService.saveData('speed',currentCarConfig.speed);
     }
+  }
+
+  onCarIncludeTowChange(includeTow: boolean): void{
+      this.storageService.saveData('hitch',''+includeTow);
+  }
+
+  onCarIncludeYokeChange(includeYoke: boolean): void{
+      this.storageService.saveData('steering',''+includeYoke);
   }
 
 }

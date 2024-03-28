@@ -4,13 +4,22 @@
     <div>
         <div>
             <label>{{carConfiguration}}</label>
+            <label>{{configCost | currency:'USD':'symbol':'1.2-2'}}</label> 
         </div>
         <div>
             <label>Range: {{carRange}} - Max speed: {{carSpeed}}</label>
         </div>
         <div>
             <label>{{carColor}}</label>  
-        </div>          
+        </div>
+        <div *ngIf="hasHitch">
+            <label>Tow Hitch Package</label>
+            <label>{{packagesCost | currency:'USD':'symbol':'1.2-2'}}</label>  
+        </div>  
+        <div *ngIf="hasSteering">
+            <label>Yoke Steering Wheel Package</label>
+            <label>{{packagesCost | currency:'USD':'symbol':'1.2-2'}}</label>  
+        </div>            
         <hr>
         <div>
             <label>TOTAL COST</label>
