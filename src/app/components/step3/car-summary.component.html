@@ -1,30 +1,59 @@
-
-    <h3>Step 3: Summary<h3>
-    <h2>Your car {{carDescription}}<h2>
-    <div>
-        <div>
-            <label>{{carConfiguration}}</label>
-            <label>{{configCost | currency:'USD':'symbol':'1.2-2'}}</label> 
-        </div>
-        <div>
-            <label>Range: {{carRange}} - Max speed: {{carSpeed}}</label>
-        </div>
-        <div>
-            <label>{{carColor}}</label>
-            <label>{{colorCost | currency:'USD':'symbol':'1.2-2'}}</label>   
-        </div>
-        <div *ngIf="hasHitch">
-            <label>Tow Hitch Package</label>
-            <label>{{packagesCost | currency:'USD':'symbol':'1.2-2'}}</label>  
-        </div>  
-        <div *ngIf="hasSteering">
-            <label>Yoke Steering Wheel Package</label>
-            <label>{{packagesCost | currency:'USD':'symbol':'1.2-2'}}</label>  
-        </div>            
-        <hr>
-        <div>
-            <label>TOTAL COST</label>
-            <label>{{carTotalCost | currency:'USD':'symbol':'1.2-2'}}</label>
-        </div>
-    </div>
-        <hr>
+<h3>
+  Step 3: Summary
+  <h3>
+    <h2>
+      Your car {{ carDescription }}
+      <h2>
+        <table>
+          <tr>
+            <td>
+                <label>{{ carConfiguration }}</label>
+            </td>
+            <td>
+                <label>{{ configCost | currency : "USD" : "symbol" : "1.2-2" }}</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <label>Range: {{ carRange }} - Max speed: {{ carSpeed }}</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <label>{{ carColor }}</label>
+            </td>
+            <td>
+                <label>{{ colorCost | currency : "USD" : "symbol" : "1.2-2" }}</label>
+            </td>
+          </tr>
+          <tr *ngIf="hasHitch">
+            <td>
+                <label>Tow Hitch Package</label>
+            </td>
+            <td>
+                <label>{{ packagesCost | currency : "USD" : "symbol" : "1.2-2" }}</label>
+            </td> 
+          </tr>
+          <tr *ngIf="hasSteering">
+            <td>
+                <label>Yoke Steering Wheel Package</label>
+            </td>
+            <td>
+                <label>{{ packagesCost | currency : "USD" : "symbol" : "1.2-2" }}</label>
+            </td>   
+          </tr>
+        </table>
+          <hr />
+        <table>
+            <td>
+                <label>TOTAL COST</label>
+            </td>
+            <td>
+                <label>{{ carTotalCost | currency : "USD" : "symbol" : "1.2-2" }}</label>
+            </td> 
+        </table>
+        <hr />
+      </h2>
+    </h2>
+  </h3>
+</h3>

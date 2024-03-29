@@ -1,15 +1,30 @@
-<h2>Step 1: Choose your Model and color<h2>
-
+<h2>
+  Step 1: Choose your Model and color
+  <h2>
     <div>
-        <label>Model: </label>
-        <select id="modelSelect" [(ngModel)]="selectedModel" (ngModelChange)="onCarModelChange(selectedModel)">
-            <option value="default"> Choose Model </option>
-            <option *ngFor="let model of carModels" [value]="model.code"> {{model.description}} </option>
-        </select>
-        <ng-container *ngIf="showColors">
+      <label>Model: </label>
+      <select
+        id="modelSelect"
+        [(ngModel)]="selectedModel"
+        (ngModelChange)="onCarModelChange(selectedModel)"
+      >
+        <option value="default">Choose Model</option>
+        <option *ngFor="let model of carModels" [value]="model.code">
+          {{ model.description }}
+        </option>
+      </select>
+      <ng-container *ngIf="showColors">
         <label>Color: </label>
-        <select id="colorSelect" [(ngModel)]="selectedColor" (ngModelChange)="onCarColorChange(selectedColor)">
-            <option *ngFor="let color of carColors" [value]="color.code"> {{color.description}} </option>
+        <select
+          id="colorSelect"
+          [(ngModel)]="selectedColor"
+          (ngModelChange)="onCarColorChange(selectedColor)"
+        >
+          <option *ngFor="let color of carColors" [value]="color.code">
+            {{ color.description }}
+          </option>
         </select>
-        </ng-container>
+      </ng-container>
     </div>
+  </h2>
+</h2>

@@ -1,21 +1,42 @@
-
-    <h2>Step 2: Select your config and options<h2>
-
+<h2>
+  Step 2: Select your config and options
+  <h2>
     <div>
-        <label>Config: </label>
-        <select id="configSelect" [(ngModel)]="selectedCarConfig" (ngModelChange)="onCarConfigChange(selectedCarConfig)">
-            <option value=0> Choose... </option>
-            <option *ngFor="let option of carOptions" [value]="option.id"> {{option.description}} </option>
-        </select>
+      <label>Config: </label>
+      <select
+        id="configSelect"
+        [(ngModel)]="selectedCarConfig"
+        (ngModelChange)="onCarConfigChange(selectedCarConfig)"
+      >
+        <option value="0">Choose...</option>
+        <option *ngFor="let option of carOptions" [value]="option.id">
+          {{ option.description }}
+        </option>
+      </select>
     </div>
     <div *ngIf="selectedCarConfig !== 0">
-        <label>Range: {{selectedRange}} - Max speed: {{selectedSpeed}} - Cost: {{selectedPrice | currency:'USD':'symbol':'1.2-2'}} </label>
+      <label
+        >Range: {{ selectedRange }} - Max speed: {{ selectedSpeed }} - Cost:
+        {{ selectedPrice | currency : "USD" : "symbol" : "1.2-2" }}
+      </label>
     </div>
     <div *ngIf="showHitch">
-       <label>Tow hitch? </label>
-       <input type="checkbox" id="includeTow" [(ngModel)]="selectedTow" (ngModelChange)="onCarIncludeTowChange(selectedTow)">
+      <label>Tow hitch? </label>
+      <input
+        type="checkbox"
+        id="includeTow"
+        [(ngModel)]="selectedTow"
+        (ngModelChange)="onCarIncludeTowChange(selectedTow)"
+      />
     </div>
     <div *ngIf="showSteering">
-        <label>yoke steering wheel? </label>
-        <input type="checkbox" id="includeYoke" [(ngModel)]="selectedYoke" (ngModelChange)="onCarIncludeYokeChange(selectedYoke)">
-     </div>
+      <label>yoke steering wheel? </label>
+      <input
+        type="checkbox"
+        id="includeYoke"
+        [(ngModel)]="selectedYoke"
+        (ngModelChange)="onCarIncludeYokeChange(selectedYoke)"
+      />
+    </div>
+  </h2>
+</h2>
